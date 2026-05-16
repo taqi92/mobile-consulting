@@ -641,9 +641,7 @@ nav.scrolled{
 .app-icon{
   width:64px;height:64px;
   flex-shrink:0;
-  transition:transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), filter 0.35s;
-  position:relative;
-  filter:drop-shadow(0 1px 1px rgba(26,31,28,0.08)) drop-shadow(0 8px 16px rgba(26,31,28,0.12));
+  transition:transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .app-icon img{
   width:100%;
@@ -653,7 +651,6 @@ nav.scrolled{
 }
 .app-card:hover .app-icon{
   transform:translateY(-2px) rotate(-2deg);
-  filter:drop-shadow(0 2px 3px rgba(26,31,28,0.1)) drop-shadow(0 14px 24px rgba(26,31,28,0.18));
 }
 .app-num{
   font-family:var(--mono);
