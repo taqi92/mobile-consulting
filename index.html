@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taqi — Senior Mobile Engineer</title>
+<title>Taqi Tahmid — Mobile Engineering Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;450;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
+  /* colors — unchanged */
   --bg: #0a0e0c;
   --bg-2: #0f1411;
   --bg-3: #141a16;
@@ -19,34 +20,50 @@
   --ink: #f4f1ea;
   --ink-dim: #b8b4ab;
   --ink-mute: #6f6c64;
-  --line: rgba(244,241,234,0.08);
-  --line-strong: rgba(244,241,234,0.18);
+  --line: rgba(244,241,234,0.07);
+  --line-strong: rgba(244,241,234,0.14);
   --moss: #7fb389;
   --moss-bright: #a3d4ad;
   --moss-deep: #2d5a3d;
-  --amber: #d4a574;
-  --rust: #c97a4b;
   --paper: #f4f1ea;
   --paper-2: #ebe6dc;
   --paper-3: #ddd6c8;
   --paper-ink: #1a1f1c;
-  --display: 'Fraunces', Georgia, serif;
-  --sans: 'Inter Tight', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --paper-muted: #6a665e;
+
+  /* type */
+  --display: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* dimensions */
+  --container: 1180px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 12px;
 }
 
 html{scroll-behavior:smooth;background:var(--bg)}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','cv11'}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15.5px;
+  line-height:1.6;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
 
-::selection{background:var(--moss);color:var(--bg)}
+::selection{background:var(--moss-deep);color:var(--ink)}
 
-/* ─── NOISE OVERLAY ─── */
+/* subtle noise — kept very low so it's invisible unless you look for it */
 body::before{
   content:'';
   position:fixed;
   inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  opacity:0.04;
+  opacity:0.025;
   pointer-events:none;
   z-index:9999;
   mix-blend-mode:overlay;
@@ -57,319 +74,235 @@ nav{
   position:fixed;
   top:0;left:0;right:0;
   z-index:100;
-  padding:1rem clamp(1.5rem,4vw,3rem);
+  padding:0.9rem clamp(1.25rem,4vw,2.5rem);
   display:flex;align-items:center;justify-content:space-between;
   transition:background 0.3s,backdrop-filter 0.3s,border-color 0.3s;
   border-bottom:1px solid transparent;
 }
 nav.scrolled{
-  background:rgba(10,14,12,0.7);
-  backdrop-filter:blur(20px) saturate(140%);
-  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  background:rgba(10,14,12,0.78);
+  backdrop-filter:blur(16px) saturate(130%);
+  -webkit-backdrop-filter:blur(16px) saturate(130%);
   border-bottom-color:var(--line);
 }
 .nav-logo{
   font-family:var(--display);
-  font-weight:400;
-  font-size:1.25rem;
+  font-weight:500;
+  font-size:1.15rem;
   color:var(--ink);
   text-decoration:none;
-  letter-spacing:-0.02em;
-  display:flex;
-  align-items:center;
-  gap:0.6rem;
+  letter-spacing:-0.005em;
+  line-height:1;
 }
-.nav-logo::before{
-  content:'';
-  width:8px;height:8px;
-  background:var(--moss);
-  border-radius:50%;
-  box-shadow:0 0 12px var(--moss);
+.nav-logo .ampersand{
+  font-style:italic;
+  color:var(--moss-bright);
+  font-weight:400;
 }
-.nav-links{display:flex;gap:2.25rem;list-style:none;align-items:center}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{
-  font-size:0.82rem;font-weight:400;
-  color:var(--ink-dim);text-decoration:none;
-  letter-spacing:0.01em;
+  font-size:0.83rem;
+  font-weight:450;
+  color:var(--ink-dim);
+  text-decoration:none;
+  letter-spacing:0.005em;
   transition:color 0.2s;
-  position:relative;
 }
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{
   background:var(--ink)!important;
   color:var(--bg)!important;
-  padding:0.55rem 1.15rem;
-  border-radius:100px;
+  padding:0.55rem 1rem;
+  border-radius:var(--radius-sm);
   font-weight:500!important;
-  transition:transform 0.2s,background 0.2s!important;
+  font-size:0.82rem!important;
+  letter-spacing:0!important;
+  transition:background 0.2s!important;
 }
-.nav-cta:hover{background:var(--moss-bright)!important;color:var(--bg)!important;transform:translateY(-1px)}
+.nav-cta:hover{background:var(--moss-bright)!important;color:var(--bg)!important}
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
-.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.25s}
+.nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:all 0.25s}
+
+/* ─── CONTAINER ─── */
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 clamp(1.25rem,4vw,2.5rem);
+}
 
 /* ─── HERO ─── */
 .hero{
   position:relative;
-  min-height:100vh;
-  padding:clamp(8rem,15vw,12rem) clamp(1.5rem,5vw,3rem) clamp(4rem,8vw,6rem);
-  display:flex;align-items:center;
-  overflow:hidden;
+  padding:clamp(7rem,12vw,9rem) 0 clamp(3.5rem,6vw,5rem);
+  border-bottom:1px solid var(--line);
 }
 
-/* layered backgrounds */
 .hero-bg{
-  position:absolute;inset:0;
-  z-index:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(127,179,137,0.12), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 70%, rgba(212,165,116,0.08), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(45,90,61,0.2), transparent 70%);
-}
-
-.hero-grid{
   position:absolute;
   inset:0;
   z-index:0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
-  opacity:0.5;
+  background:
+    radial-gradient(ellipse 60% 50% at 18% 25%, rgba(127,179,137,0.06), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 88% 80%, rgba(127,179,137,0.04), transparent 70%);
+  pointer-events:none;
 }
 
 .hero-inner{
   position:relative;
   z-index:2;
-  max-width:1280px;
-  margin:0 auto;
-  width:100%;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:2.5rem;
 }
 
-.hero-badge{
-  display:inline-flex;
+.hero-meta{
+  display:flex;
   align-items:center;
-  gap:0.6rem;
-  padding:0.4rem 0.9rem 0.4rem 0.5rem;
-  background:rgba(127,179,137,0.08);
-  border:1px solid rgba(127,179,137,0.2);
-  border-radius:100px;
+  gap:1rem;
+  margin-bottom:2.5rem;
   font-size:0.78rem;
-  color:var(--moss-bright);
-  font-weight:500;
+  color:var(--ink-mute);
   letter-spacing:0.01em;
-  width:fit-content;
-  backdrop-filter:blur(8px);
 }
-.hero-badge .dot{
+.hero-meta .dot{
+  display:inline-block;
   width:6px;height:6px;
-  background:var(--moss-bright);
+  background:var(--moss);
   border-radius:50%;
-  box-shadow:0 0 8px var(--moss-bright);
-  animation:pulse 2.5s infinite;
 }
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.5;transform:scale(0.85)}
+.hero-meta .sep{color:var(--line-strong)}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1.4fr) minmax(0, 1fr);
+  gap:clamp(2.5rem, 6vw, 5rem);
+  align-items:start;
 }
-.hero-badge .sep{width:1px;height:12px;background:rgba(127,179,137,0.3)}
-.hero-badge .label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;opacity:0.8}
 
 .hero-title{
   font-family:var(--display);
-  font-size:clamp(3rem,8.5vw,7.5rem);
-  line-height:0.95;
-  letter-spacing:-0.04em;
+  font-size:clamp(2.4rem, 5.5vw, 4.25rem);
+  line-height:1.04;
+  letter-spacing:-0.015em;
   color:var(--ink);
-  font-weight:400;
-  font-variation-settings:"opsz" 144, "SOFT" 50;
+  font-weight:500;
   max-width:14ch;
+  margin-bottom:1.75rem;
 }
 .hero-title .italic{
   font-style:italic;
-  font-weight:300;
-  color:var(--moss-bright);
-}
-.hero-title .stroke{
-  position:relative;
-  display:inline-block;
-}
-.hero-title .stroke::after{
-  content:'';
-  position:absolute;
-  left:0;right:0;
-  bottom:0.1em;
-  height:0.08em;
-  background:var(--moss);
-  opacity:0.5;
-  transform:scaleX(0);
-  transform-origin:left;
-  animation:strokeIn 1.2s 0.8s ease-out forwards;
-}
-@keyframes strokeIn{to{transform:scaleX(1)}}
-
-.hero-meta-bar{
-  display:flex;
-  gap:clamp(1.5rem,4vw,3rem);
-  align-items:center;
-  flex-wrap:wrap;
-  padding:1.25rem 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  margin-top:1rem;
-}
-.hero-meta-item{
-  font-family:var(--mono);
-  font-size:0.72rem;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:var(--ink-mute);
-}
-.hero-meta-item strong{
-  font-family:var(--display);
-  font-size:1.3rem;
-  color:var(--ink);
   font-weight:400;
-  font-style:normal;
-  letter-spacing:-0.02em;
-  text-transform:none;
-  margin-right:0.4rem;
-}
-
-.hero-bottom{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:3rem;
-  align-items:end;
-  margin-top:1rem;
+  color:var(--moss-bright);
 }
 
 .hero-sub{
-  font-size:clamp(1rem,1.5vw,1.15rem);
+  font-size:1.025rem;
   color:var(--ink-dim);
-  line-height:1.7;
-  max-width:42ch;
-  font-weight:300;
+  line-height:1.65;
+  max-width:46ch;
+  font-weight:400;
+  margin-bottom:2.25rem;
 }
 
 .hero-actions{
   display:flex;
   gap:0.75rem;
   flex-wrap:wrap;
+  align-items:center;
 }
 
 .btn{
   display:inline-flex;
   align-items:center;
   gap:0.5rem;
-  padding:0.95rem 1.6rem;
-  border-radius:100px;
-  font-size:0.9rem;
+  padding:0.75rem 1.25rem;
+  border-radius:var(--radius-sm);
+  font-size:0.85rem;
   font-weight:500;
   text-decoration:none;
-  transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing:0.01em;
+  transition:all 0.2s ease;
+  letter-spacing:0.005em;
   border:1px solid transparent;
-  cursor:pointer;
   font-family:var(--sans);
+  cursor:pointer;
 }
-
 .btn-primary{
   background:var(--ink);
   color:var(--bg);
 }
-.btn-primary:hover{background:var(--moss-bright);transform:translateY(-2px);box-shadow:0 8px 24px rgba(163,212,173,0.2)}
-.btn-primary .arrow{
-  display:inline-block;
-  transition:transform 0.25s;
-}
-.btn-primary:hover .arrow{transform:translateX(3px)}
-
+.btn-primary:hover{background:var(--moss-bright)}
+.btn-primary .arrow{transition:transform 0.2s}
+.btn-primary:hover .arrow{transform:translateX(2px)}
 .btn-ghost{
   background:transparent;
-  color:var(--ink);
+  color:var(--ink-dim);
   border-color:var(--line-strong);
 }
-.btn-ghost:hover{background:rgba(244,241,234,0.05);border-color:var(--ink-dim)}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink-dim)}
 
-.hero-side-info{
+.hero-side{
+  padding-top:0.5rem;
+}
+.hero-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.75rem 2rem;
+  margin-bottom:2rem;
+  padding-bottom:1.75rem;
+  border-bottom:1px solid var(--line);
+}
+.hero-stat{
   display:flex;
   flex-direction:column;
-  gap:1rem;
-  padding:1.5rem;
-  background:rgba(244,241,234,0.02);
-  border:1px solid var(--line);
-  border-radius:12px;
-  backdrop-filter:blur(8px);
+  gap:0.35rem;
 }
-.hero-side-info .label{
-  font-family:var(--mono);
-  font-size:0.7rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
+.hero-stat strong{
+  font-family:var(--display);
+  font-size:1.85rem;
+  color:var(--ink);
+  font-weight:500;
+  font-style:normal;
+  line-height:1;
+  letter-spacing:-0.015em;
+}
+.hero-stat span{
+  font-size:0.72rem;
   color:var(--ink-mute);
-  margin-bottom:0.25rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
 }
-.hero-side-info .stack-list{
+
+.hero-side .label{
+  font-size:0.72rem;
+  color:var(--ink-mute);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-bottom:0.7rem;
+}
+.hero-side .stack-list{
   display:flex;
   flex-wrap:wrap;
-  gap:0.4rem;
+  gap:0.3rem;
 }
-.hero-side-info .stack-pill{
-  font-family:var(--mono);
-  font-size:0.7rem;
-  padding:0.25rem 0.6rem;
-  border:1px solid var(--line-strong);
-  border-radius:4px;
+.hero-side .stack-pill{
+  font-size:0.74rem;
+  font-weight:450;
+  padding:0.25rem 0.55rem;
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
   color:var(--ink-dim);
-  letter-spacing:0.02em;
+  background:transparent;
 }
 
-.scroll-hint{
-  position:absolute;
-  bottom:1.5rem;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:var(--mono);
-  font-size:0.7rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--ink-mute);
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-  opacity:0.5;
-  z-index:3;
-}
-.scroll-hint::after{
-  content:'';
-  width:1px;height:20px;
-  background:var(--ink-mute);
-  animation:scrollDot 2s infinite;
-}
-@keyframes scrollDot{
-  0%,100%{transform:scaleY(1);opacity:0.3}
-  50%{transform:scaleY(1.4);opacity:1}
-}
-
-/* ─── MARQUEE ─── */
+/* ─── MARQUEE (subtler) ─── */
 .marquee{
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  padding:1.25rem 0;
+  padding:1rem 0;
   overflow:hidden;
   background:var(--bg-2);
-  position:relative;
-  z-index:5;
 }
 .marquee-track{
   display:flex;
-  gap:3rem;
-  animation:scroll 40s linear infinite;
+  gap:2.5rem;
+  animation:scroll 45s linear infinite;
   width:max-content;
   align-items:center;
 }
@@ -380,179 +313,143 @@ nav.scrolled{
 .marquee-item{
   font-family:var(--display);
   font-style:italic;
-  font-size:clamp(1.2rem,2.5vw,1.8rem);
-  font-weight:300;
+  font-size:1.1rem;
+  font-weight:400;
   color:var(--ink-mute);
   white-space:nowrap;
-  letter-spacing:-0.01em;
+  letter-spacing:0;
 }
 .marquee-dot{
-  width:6px;height:6px;
+  width:4px;height:4px;
   background:var(--moss);
   border-radius:50%;
   flex-shrink:0;
 }
 
-/* ─── SECTION SCAFFOLDING ─── */
+/* ─── SECTIONS ─── */
 .section{
-  position:relative;
-  padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem);
-  max-width:1280px;
-  margin:0 auto;
+  padding:clamp(4rem,8vw,6rem) 0;
 }
-
 .section-light{
   background:var(--paper);
   color:var(--paper-ink);
-}
-.section-light-wrap{
-  background:var(--paper);
-  color:var(--paper-ink);
-  position:relative;
 }
 
 .section-head{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:4rem;
-  margin-bottom:clamp(3rem,6vw,5rem);
+  gap:3rem;
+  margin-bottom:clamp(2.5rem,5vw,3.5rem);
   align-items:end;
 }
 
 .section-eyebrow{
-  font-family:var(--mono);
   font-size:0.72rem;
-  letter-spacing:0.15em;
+  font-weight:500;
+  letter-spacing:0.14em;
   text-transform:uppercase;
   color:var(--moss);
-  margin-bottom:1rem;
-  display:flex;
-  align-items:center;
-  gap:0.75rem;
+  margin-bottom:0.85rem;
 }
-.section-light .section-eyebrow{color:var(--moss-deep)}
-.section-eyebrow::before{
-  content:'';
-  width:24px;height:1px;
-  background:currentColor;
-}
+.section-light .section-eyebrow,
+.work-wrap .section-eyebrow,
+.testimonials-wrap .section-eyebrow{color:var(--moss-deep)}
 
 .section-title{
   font-family:var(--display);
-  font-size:clamp(2.2rem,5vw,4.2rem);
-  line-height:1;
-  letter-spacing:-0.03em;
-  font-weight:400;
+  font-size:clamp(1.85rem,3.6vw,2.85rem);
+  line-height:1.08;
+  letter-spacing:-0.012em;
+  font-weight:500;
   color:var(--ink);
+  max-width:18ch;
 }
-.section-light .section-title{color:var(--paper-ink)}
+.section-light .section-title,
+.work-wrap .section-title,
+.testimonials-wrap .section-title{color:var(--paper-ink)}
 .section-title em{
   font-style:italic;
-  font-weight:300;
+  font-weight:400;
   color:var(--moss-bright);
 }
-.section-light .section-title em{color:var(--moss-deep)}
+.section-light .section-title em,
+.work-wrap .section-title em,
+.testimonials-wrap .section-title em{color:var(--moss-deep)}
 
 .section-lead{
-  font-size:clamp(1rem,1.3vw,1.1rem);
+  font-size:0.98rem;
   color:var(--ink-dim);
-  line-height:1.7;
-  font-weight:300;
-  max-width:46ch;
+  line-height:1.65;
+  max-width:44ch;
+  font-weight:400;
 }
-.section-light .section-lead{color:#5a5a52}
+.section-light .section-lead,
+.work-wrap .section-lead,
+.testimonials-wrap .section-lead{color:var(--paper-muted)}
 
 /* ─── ABOUT ─── */
-.about-wrap{
-  background:var(--bg);
-  position:relative;
-  overflow:hidden;
-}
-.about-wrap::before{
-  content:'';
-  position:absolute;
-  top:-200px;right:-200px;
-  width:600px;height:600px;
-  background:radial-gradient(circle, rgba(127,179,137,0.08), transparent 70%);
-  pointer-events:none;
-}
+.about-wrap{background:var(--bg)}
 
 .about-grid{
   display:grid;
   grid-template-columns:1.3fr 1fr;
-  gap:5rem;
+  gap:clamp(3rem,6vw,5rem);
   align-items:start;
 }
 
 .about-text{
-  font-size:clamp(1rem,1.3vw,1.15rem);
-  line-height:1.85;
+  font-size:1.025rem;
+  line-height:1.75;
   color:var(--ink-dim);
-  font-weight:300;
+  font-weight:400;
 }
-.about-text p{margin-bottom:1.5rem}
+.about-text p{margin-bottom:1.25rem}
+.about-text p:last-child{margin-bottom:0}
 .about-text strong{color:var(--ink);font-weight:500}
 
 .pullquote{
   font-family:var(--display);
   font-style:italic;
-  font-weight:300;
-  font-size:clamp(1.4rem,2.4vw,2rem);
-  line-height:1.3;
+  font-weight:400;
+  font-size:clamp(1.4rem,2.2vw,1.75rem);
+  line-height:1.35;
   color:var(--moss-bright);
-  padding:2rem 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  margin:2.5rem 0;
-  letter-spacing:-0.01em;
-}
-.pullquote::before{
-  content:'"';
-  display:block;
-  font-size:3rem;
-  line-height:0.5;
-  color:var(--moss);
-  margin-bottom:0.5rem;
-  opacity:0.6;
+  padding:1.5rem 0 1.5rem 1.5rem;
+  border-left:2px solid var(--moss-deep);
+  margin:2rem 0;
+  letter-spacing:-0.005em;
+  max-width:32ch;
 }
 
 .about-card{
   background:var(--bg-3);
   border:1px solid var(--line);
-  border-radius:16px;
-  padding:2rem;
+  border-radius:var(--radius);
+  padding:1.75rem;
   display:flex;
   flex-direction:column;
-  gap:1.5rem;
-  position:relative;
-  overflow:hidden;
-}
-.about-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:1px;
-  background:linear-gradient(90deg, transparent, var(--moss), transparent);
+  gap:1.25rem;
 }
 .about-card-label{
-  font-family:var(--mono);
   font-size:0.7rem;
-  letter-spacing:0.12em;
+  letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--ink-mute);
+  font-weight:500;
 }
 .about-card-quote{
   font-family:var(--display);
   font-style:italic;
-  font-weight:300;
-  font-size:1.05rem;
-  line-height:1.55;
+  font-weight:400;
+  font-size:1.2rem;
+  line-height:1.5;
   color:var(--ink);
+  letter-spacing:-0.008em;
 }
 .about-card-attr{
   display:flex;
   flex-direction:column;
-  gap:0.2rem;
+  gap:0.15rem;
   padding-top:1rem;
   border-top:1px solid var(--line);
 }
@@ -569,66 +466,56 @@ nav.scrolled{
 .about-links{
   display:flex;
   flex-direction:column;
-  gap:0.5rem;
   margin-top:1rem;
 }
 .about-link{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0.85rem 1.1rem;
-  background:var(--bg-3);
-  border:1px solid var(--line);
-  border-radius:8px;
+  padding:0.9rem 0;
+  border-bottom:1px solid var(--line);
   text-decoration:none;
   color:var(--ink-dim);
   font-size:0.88rem;
-  transition:all 0.25s;
+  transition:color 0.2s;
 }
-.about-link:hover{
-  background:var(--surface);
-  border-color:var(--line-strong);
-  color:var(--ink);
-  transform:translateX(4px);
-}
+.about-link:last-child{border-bottom:none}
+.about-link:hover{color:var(--ink)}
+.about-link:hover .arrow{transform:translate(2px,-2px);color:var(--moss-bright)}
 .about-link .arrow{
-  font-family:var(--mono);
-  color:var(--moss);
-  transition:transform 0.25s;
+  color:var(--ink-mute);
+  transition:transform 0.2s, color 0.2s;
+  font-size:0.85rem;
 }
-.about-link:hover .arrow{transform:translate(3px,-3px)}
 
 /* ─── WORK SECTION (light) ─── */
 .work-wrap{
   background:var(--paper);
   color:var(--paper-ink);
-  position:relative;
 }
 
 .apps-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:1.25rem;
+  gap:1rem;
 }
 
 .app-card{
   position:relative;
   background:var(--paper-2);
-  border:1px solid rgba(26,31,28,0.08);
-  border-radius:20px;
-  padding:0;
+  border:1px solid rgba(26,31,28,0.06);
+  border-radius:var(--radius-lg);
   text-decoration:none;
   color:inherit;
   display:flex;
   flex-direction:column;
   overflow:hidden;
-  transition:transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s, background 0.35s;
-  cursor:pointer;
+  transition:background 0.25s, border-color 0.25s, transform 0.25s;
 }
 .app-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 24px 48px -12px rgba(26,31,28,0.18);
   background:#fff;
+  border-color:rgba(26,31,28,0.12);
+  transform:translateY(-2px);
 }
 .app-card-header{
   padding:1.5rem 1.5rem 0;
@@ -636,85 +523,72 @@ nav.scrolled{
   justify-content:space-between;
   align-items:flex-start;
 }
-
-
 .app-icon{
-  width:64px;height:64px;
+  width:56px;height:56px;
   flex-shrink:0;
-  border-radius:14px;
-  overflow:hidden;
-  background:var(--paper-2);
-  transition:transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s;
+  transition:transform 0.3s;
 }
-.app-card:hover .app-icon{
-  background:#fff;
-}
-.app-icon img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:contain;
-}
+.app-icon img{width:100%;height:100%;display:block}
+.app-card:hover .app-icon{transform:translateY(-1px)}
 .app-num{
-  font-family:var(--mono);
-  font-size:0.72rem;
-  color:var(--ink-mute);
-  letter-spacing:0.05em;
-  padding-top:0.4rem;
+  font-size:0.7rem;
+  color:var(--paper-muted);
+  letter-spacing:0.04em;
+  padding-top:0.35rem;
+  font-feature-settings:'tnum';
 }
 .app-body{
-  padding:1.5rem;
+  padding:1.25rem 1.5rem 1.5rem;
   display:flex;
   flex-direction:column;
   flex:1;
 }
 .app-type{
-  font-family:var(--mono);
   font-size:0.68rem;
   letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--moss-deep);
   margin-bottom:0.5rem;
-  margin-top:1.25rem;
+  margin-top:1rem;
+  font-weight:500;
 }
 .app-card h3{
   font-family:var(--display);
-  font-size:1.4rem;
-  font-weight:400;
-  letter-spacing:-0.02em;
-  margin-bottom:0.75rem;
+  font-size:1.45rem;
+  font-weight:500;
+  letter-spacing:-0.012em;
+  margin-bottom:0.6rem;
   line-height:1.1;
 }
 .app-card p{
   font-size:0.88rem;
-  color:#5a5a52;
-  line-height:1.6;
+  color:var(--paper-muted);
+  line-height:1.55;
   flex:1;
-  margin-bottom:1.25rem;
-  font-weight:300;
+  margin-bottom:1.1rem;
+  font-weight:400;
 }
 .app-tags{
   display:flex;
   flex-wrap:wrap;
-  gap:0.35rem;
-  margin-bottom:1.25rem;
+  gap:0.3rem;
+  margin-bottom:1.1rem;
 }
 .tag{
-  font-family:var(--mono);
-  font-size:0.66rem;
-  padding:0.25rem 0.6rem;
+  font-size:0.7rem;
+  padding:0.2rem 0.5rem;
   background:var(--paper-3);
-  color:#5a5a52;
-  border-radius:4px;
-  letter-spacing:0.03em;
-  text-transform:uppercase;
+  color:var(--paper-muted);
+  border-radius:var(--radius-sm);
+  letter-spacing:0.02em;
+  font-weight:450;
 }
 .app-footer{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding-top:1.25rem;
-  border-top:1px solid rgba(26,31,28,0.08);
+  padding-top:1rem;
+  border-top:1px solid rgba(26,31,28,0.06);
 }
 .app-link{
   font-size:0.82rem;
@@ -722,16 +596,16 @@ nav.scrolled{
   color:var(--moss-deep);
   display:inline-flex;
   align-items:center;
-  gap:0.4rem;
-  transition:gap 0.25s;
+  gap:0.35rem;
+  transition:gap 0.2s;
 }
-.app-card:hover .app-link{gap:0.7rem}
+.app-card:hover .app-link{gap:0.55rem}
 .app-store-badge{
-  font-family:var(--mono);
   font-size:0.66rem;
-  letter-spacing:0.05em;
-  color:var(--ink-mute);
+  letter-spacing:0.06em;
+  color:var(--paper-muted);
   text-transform:uppercase;
+  font-weight:500;
 }
 
 /* ─── SERVICES (dark) ─── */
@@ -739,377 +613,333 @@ nav.scrolled{
 
 .tracks-nav{
   display:flex;
-  gap:0.5rem;
-  margin-bottom:3rem;
-  padding:0.4rem;
-  background:var(--bg-3);
-  border:1px solid var(--line);
-  border-radius:100px;
-  width:fit-content;
+  gap:0;
+  margin-bottom:2.5rem;
+  border-bottom:1px solid var(--line);
   overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
 }
 .track-tab{
-  font-size:0.85rem;
-  font-weight:500;
-  padding:0.7rem 1.4rem;
+  font-size:0.88rem;
+  font-weight:450;
+  padding:0.85rem 1.25rem 1rem;
   cursor:pointer;
-  color:var(--ink-dim);
+  color:var(--ink-mute);
   background:transparent;
   border:none;
-  border-radius:100px;
-  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom:1.5px solid transparent;
+  transition:color 0.25s, border-color 0.25s;
   font-family:var(--sans);
   white-space:nowrap;
-  letter-spacing:0.01em;
+  letter-spacing:0;
+  margin-bottom:-1px;
 }
 .track-tab.active{
-  background:var(--ink);
-  color:var(--bg);
+  color:var(--ink);
+  border-bottom-color:var(--moss-bright);
 }
-.track-tab:hover:not(.active){color:var(--ink)}
+.track-tab:hover:not(.active){color:var(--ink-dim)}
+.track-tab .num{
+  font-size:0.7rem;
+  color:var(--ink-mute);
+  margin-right:0.4rem;
+  font-feature-settings:'tnum';
+}
+.track-tab.active .num{color:var(--moss-bright)}
 
 .track-panel{display:none}
 .track-panel.active{display:block;animation:fadeIn 0.4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 .track-intro{
   display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:4rem;
-  margin-bottom:3rem;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,5vw,4rem);
+  margin-bottom:2.5rem;
   align-items:start;
-  padding-bottom:3rem;
+  padding-bottom:2.5rem;
   border-bottom:1px solid var(--line);
 }
 .track-intro h3{
   font-family:var(--display);
-  font-size:clamp(1.6rem,3vw,2.4rem);
-  font-weight:400;
-  letter-spacing:-0.02em;
-  line-height:1.1;
-  margin-bottom:1.25rem;
-}
-.track-intro h3 em{font-style:italic;color:var(--moss-bright);font-weight:300}
-.track-intro p{
-  font-size:1rem;
-  color:var(--ink-dim);
-  line-height:1.75;
+  font-size:clamp(1.5rem,2.6vw,2rem);
+  font-weight:500;
+  letter-spacing:-0.012em;
+  line-height:1.12;
   margin-bottom:1rem;
-  font-weight:300;
+  max-width:18ch;
 }
-.track-pill{
+.track-intro h3 em{font-style:italic;color:var(--moss-bright);font-weight:400}
+.track-intro p{
+  font-size:0.98rem;
+  color:var(--ink-dim);
+  line-height:1.7;
+  margin-bottom:1rem;
+  font-weight:400;
+  max-width:42ch;
+}
+.track-context{
   display:inline-block;
-  font-family:var(--mono);
-  font-size:0.7rem;
-  padding:0.4rem 0.85rem;
-  background:rgba(127,179,137,0.1);
-  border:1px solid rgba(127,179,137,0.25);
-  color:var(--moss-bright);
-  border-radius:100px;
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-  margin-top:1rem;
+  font-size:0.72rem;
+  padding:0.35rem 0.75rem;
+  background:transparent;
+  border:1px solid var(--line-strong);
+  color:var(--ink-dim);
+  border-radius:var(--radius-sm);
+  letter-spacing:0.02em;
+  margin-top:0.75rem;
+  font-weight:450;
 }
 .track-topics{
   display:flex;
   flex-direction:column;
 }
 .topic-row{
-  display:flex;
-  align-items:flex-start;
-  gap:1rem;
-  font-size:0.92rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:baseline;
+  gap:1.25rem;
+  font-size:0.93rem;
   color:var(--ink-dim);
-  padding:1rem 0;
+  padding:0.85rem 0;
   border-bottom:1px solid var(--line);
-  line-height:1.5;
-  font-weight:300;
+  line-height:1.55;
+  font-weight:400;
 }
 .topic-row:last-child{border-bottom:none}
 .topic-num{
-  font-family:var(--mono);
   font-size:0.72rem;
-  color:var(--moss);
-  letter-spacing:0.05em;
-  min-width:1.8rem;
-  padding-top:0.15rem;
+  color:var(--ink-mute);
+  font-feature-settings:'tnum';
+  letter-spacing:0.02em;
 }
 
 /* ─── SERVICE CARDS ─── */
 .services-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:1rem;
-  margin-bottom:2.5rem;
+  margin-bottom:2.25rem;
 }
 .service-card{
   position:relative;
   background:var(--bg-3);
   border:1px solid var(--line);
-  border-radius:16px;
-  padding:1.75rem;
+  border-radius:var(--radius);
+  padding:1.5rem;
   display:flex;
   flex-direction:column;
-  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow:hidden;
+  transition:border-color 0.25s, background 0.25s;
 }
 .service-card:hover{
   border-color:var(--line-strong);
   background:var(--surface);
-  transform:translateY(-3px);
 }
 .service-card.featured{
-  background:linear-gradient(135deg,var(--moss-deep), #1e3a2a);
-  border-color:rgba(127,179,137,0.3);
-}
-.service-card.featured::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:1px;
-  background:linear-gradient(90deg, transparent, var(--moss-bright), transparent);
+  background:var(--bg-3);
+  border-color:rgba(127,179,137,0.22);
 }
 .service-card.featured:hover{
-  background:linear-gradient(135deg,#1e3a2a, var(--moss-deep));
-  border-color:rgba(127,179,137,0.5);
+  background:var(--surface);
+  border-color:rgba(127,179,137,0.35);
 }
 
 .service-note{
-  font-family:var(--mono);
-  font-size:0.66rem;
+  font-size:0.68rem;
   letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--moss);
   margin-bottom:1rem;
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
+  font-weight:500;
 }
 .service-card.featured .service-note{color:var(--moss-bright)}
-.service-note::before{
-  content:'';
-  width:4px;height:4px;
-  background:currentColor;
-  border-radius:50%;
-}
+
 .service-card h4{
   font-family:var(--display);
-  font-size:1.35rem;
-  font-weight:400;
-  letter-spacing:-0.02em;
+  font-size:1.3rem;
+  font-weight:500;
+  letter-spacing:-0.012em;
   color:var(--ink);
-  margin-bottom:0.6rem;
+  margin-bottom:0.5rem;
   line-height:1.15;
 }
 .service-card p{
   font-size:0.88rem;
   color:var(--ink-dim);
-  line-height:1.65;
+  line-height:1.6;
   flex:1;
-  margin-bottom:1.5rem;
-  font-weight:300;
+  margin-bottom:1.25rem;
+  font-weight:400;
 }
 .service-footer{
   display:flex;
   justify-content:space-between;
-  align-items:flex-end;
-  padding-top:1.25rem;
+  align-items:baseline;
+  padding-top:1rem;
   border-top:1px solid var(--line);
 }
-.service-card.featured .service-footer{border-top-color:rgba(127,179,137,0.15)}
 .service-duration{
-  font-family:var(--mono);
   font-size:0.72rem;
   color:var(--ink-mute);
   letter-spacing:0.04em;
   text-transform:uppercase;
+  font-weight:500;
 }
-.service-card.featured .service-duration{color:rgba(244,241,234,0.5)}
 .service-price{
   font-family:var(--display);
-  font-size:1.8rem;
+  font-size:1.55rem;
   color:var(--ink);
   line-height:1;
-  font-weight:400;
-  letter-spacing:-0.02em;
+  font-weight:500;
+  letter-spacing:-0.015em;
 }
 .service-price .currency{
-  font-size:0.9rem;
+  font-size:0.85rem;
   color:var(--ink-mute);
   font-weight:400;
-  vertical-align:top;
-  margin-right:2px;
+  margin-right:1px;
 }
 
 .track-cta{
   display:inline-flex;
   align-items:center;
-  gap:0.5rem;
+  gap:0.45rem;
   background:var(--ink);
   color:var(--bg);
   font-family:var(--sans);
-  font-size:0.9rem;
+  font-size:0.85rem;
   font-weight:500;
-  padding:1rem 1.85rem;
-  border-radius:100px;
+  padding:0.75rem 1.25rem;
+  border-radius:var(--radius-sm);
   text-decoration:none;
-  transition:all 0.25s;
-  letter-spacing:0.01em;
+  transition:background 0.2s;
 }
-.track-cta:hover{background:var(--moss-bright);transform:translateY(-2px);box-shadow:0 8px 24px rgba(163,212,173,0.2)}
-.track-cta .arrow{transition:transform 0.25s}
-.track-cta:hover .arrow{transform:translateX(3px)}
+.track-cta:hover{background:var(--moss-bright)}
+.track-cta .arrow{transition:transform 0.2s}
+.track-cta:hover .arrow{transform:translateX(2px)}
 
 /* ─── TESTIMONIALS (light) ─── */
 .testimonials-wrap{
   background:var(--paper);
   color:var(--paper-ink);
 }
-
 .testimonials-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:1.5rem;
+  gap:1rem;
 }
 .testimonial-card{
   background:var(--paper-2);
-  border:1px solid rgba(26,31,28,0.08);
-  border-radius:20px;
-  padding:2rem;
-  transition:all 0.3s;
-  position:relative;
+  border:1px solid rgba(26,31,28,0.06);
+  border-radius:var(--radius-lg);
+  padding:2rem 2rem 1.75rem;
+  transition:background 0.25s, border-color 0.25s;
 }
 .testimonial-card:hover{
   background:#fff;
-  transform:translateY(-3px);
-  box-shadow:0 16px 32px -8px rgba(26,31,28,0.1);
-}
-.testimonial-card .quote-mark{
-  font-family:var(--display);
-  font-size:3rem;
-  line-height:0.5;
-  color:var(--moss-deep);
-  opacity:0.4;
-  margin-bottom:0.5rem;
+  border-color:rgba(26,31,28,0.1);
 }
 .testimonial-card blockquote{
   font-family:var(--display);
   font-style:italic;
-  font-weight:300;
-  font-size:1.1rem;
-  line-height:1.55;
+  font-weight:400;
+  font-size:1.3rem;
+  line-height:1.45;
   color:var(--paper-ink);
-  margin-bottom:1.5rem;
-  letter-spacing:-0.005em;
+  margin-bottom:1.75rem;
+  letter-spacing:-0.008em;
 }
 .testimonial-attr{
   display:flex;
   align-items:center;
   gap:0.75rem;
-  padding-top:1.25rem;
-  border-top:1px solid rgba(26,31,28,0.08);
+  padding-top:1.1rem;
+  border-top:1px solid rgba(26,31,28,0.06);
 }
 .testimonial-avatar{
-  width:40px;height:40px;
+  width:36px;height:36px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:var(--mono);
   font-size:0.78rem;
   font-weight:500;
   color:var(--paper);
   flex-shrink:0;
   letter-spacing:0.02em;
 }
-.avatar-1{background:linear-gradient(135deg,#2d5a3d,#7fb389)}
-.avatar-2{background:linear-gradient(135deg,#c97a4b,#e8a87c)}
-.avatar-3{background:linear-gradient(135deg,#3a5a6f,#5d8aa3)}
-.avatar-4{background:linear-gradient(135deg,#8b3a4e,#c2546b)}
+.avatar-1{background:#2d5a3d}
+.avatar-2{background:#9a5a3a}
+.avatar-3{background:#3a5a6f}
+.avatar-4{background:#6b3d4e}
 
-.attr-info{display:flex;flex-direction:column;gap:0.15rem}
+.attr-info{display:flex;flex-direction:column;gap:0.1rem}
 .attr-name{
   font-size:0.88rem;
   font-weight:500;
   color:var(--paper-ink);
 }
 .attr-role{
-  font-size:0.75rem;
-  color:#7a7570;
-  letter-spacing:0.01em;
+  font-size:0.76rem;
+  color:var(--paper-muted);
+  letter-spacing:0;
 }
 
 /* ─── BOOKING ─── */
 .booking-wrap{
   background:var(--bg);
-  position:relative;
-  overflow:hidden;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
-.booking-wrap::before{
-  content:'';
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:120%;height:200%;
-  background:radial-gradient(ellipse, rgba(127,179,137,0.1), transparent 50%);
-  pointer-events:none;
-}
-
 .booking-inner{
-  position:relative;
-  max-width:1280px;
-  margin:0 auto;
-  padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem);
   display:grid;
   grid-template-columns:1.2fr 1fr;
-  gap:5rem;
-  align-items:center;
+  gap:clamp(3rem,6vw,5rem);
+  align-items:start;
 }
 .booking-inner h2{
   font-family:var(--display);
-  font-size:clamp(2.5rem,6vw,5rem);
-  font-weight:400;
-  letter-spacing:-0.03em;
-  line-height:0.95;
-  margin-bottom:1.5rem;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:500;
+  letter-spacing:-0.015em;
+  line-height:1.05;
+  margin-bottom:1.25rem;
 }
-.booking-inner h2 em{font-style:italic;color:var(--moss-bright);font-weight:300}
+.booking-inner h2 em{font-style:italic;color:var(--moss-bright);font-weight:400}
 .booking-inner > div:first-child p{
-  font-size:1.05rem;
+  font-size:1rem;
   line-height:1.7;
   color:var(--ink-dim);
-  margin-bottom:2rem;
-  font-weight:300;
-  max-width:42ch;
+  margin-bottom:1.75rem;
+  font-weight:400;
+  max-width:44ch;
 }
 .booking-policies{
   display:flex;
   flex-direction:column;
-  background:var(--bg-3);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:0.5rem 1.5rem;
+  padding-top:0.5rem;
 }
 .policy-row{
   display:grid;
-  grid-template-columns:140px 1fr;
+  grid-template-columns:130px 1fr;
   gap:1rem;
   align-items:flex-start;
   font-size:0.9rem;
   color:var(--ink-dim);
-  padding:1.25rem 0;
+  padding:0.95rem 0;
   border-bottom:1px solid var(--line);
-  font-weight:300;
+  font-weight:400;
+  line-height:1.55;
 }
-.policy-row:last-child{border-bottom:none}
+.policy-row:first-child{padding-top:0}
+.policy-row:last-child{border-bottom:none;padding-bottom:0}
 .policy-label{
-  font-family:var(--mono);
   font-size:0.72rem;
   font-weight:500;
   color:var(--moss-bright);
-  letter-spacing:0.05em;
+  letter-spacing:0.04em;
   text-transform:uppercase;
-  padding-top:0.1rem;
+  padding-top:0.15rem;
 }
 
 /* ─── FAQ ─── */
@@ -1117,65 +947,59 @@ nav.scrolled{
 .faq-list{
   display:flex;
   flex-direction:column;
-  gap:0.5rem;
-  margin-top:2.5rem;
+  margin-top:2rem;
+  border-top:1px solid var(--line);
 }
 .faq-item{
-  background:var(--bg-3);
-  border:1px solid var(--line);
-  border-radius:12px;
-  transition:border-color 0.2s;
-  overflow:hidden;
+  border-bottom:1px solid var(--line);
 }
-.faq-item.open{border-color:var(--line-strong)}
 .faq-q{
   width:100%;
   background:none;
   border:none;
-  padding:1.35rem 1.6rem;
+  padding:1.25rem 0;
   display:flex;
   justify-content:space-between;
   align-items:center;
   cursor:pointer;
   font-family:var(--sans);
-  font-size:0.95rem;
-  font-weight:500;
+  font-size:0.98rem;
+  font-weight:450;
   color:var(--ink);
   text-align:left;
-  transition:background 0.2s;
   gap:1rem;
+  transition:color 0.2s;
 }
-.faq-q:hover{background:rgba(244,241,234,0.02)}
+.faq-q:hover{color:var(--moss-bright)}
 .faq-icon{
-  width:28px;height:28px;
-  border-radius:50%;
-  border:1px solid var(--line-strong);
+  font-size:1.1rem;
+  color:var(--ink-mute);
+  font-weight:300;
+  transition:transform 0.3s, color 0.3s;
+  flex-shrink:0;
+  width:1rem;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
-  font-size:0.9rem;
-  transition:transform 0.3s,border-color 0.3s;
-  color:var(--ink-dim);
+  line-height:1;
 }
 .faq-item.open .faq-icon{
   transform:rotate(45deg);
-  border-color:var(--moss);
   color:var(--moss-bright);
 }
 .faq-a{
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.35s ease,padding 0.35s;
-  padding:0 1.6rem;
-  font-size:0.9rem;
+  transition:max-height 0.3s ease, padding 0.3s;
+  font-size:0.92rem;
   color:var(--ink-dim);
-  line-height:1.75;
-  font-weight:300;
+  line-height:1.7;
+  font-weight:400;
+  max-width:65ch;
 }
 .faq-item.open .faq-a{
-  max-height:400px;
-  padding:0 1.6rem 1.4rem;
+  max-height:300px;
+  padding:0 0 1.25rem;
 }
 
 /* ─── FOOTER ─── */
@@ -1184,33 +1008,30 @@ footer{
   background:var(--bg-2);
 }
 .footer-inner{
-  max-width:1280px;
-  margin:0 auto;
-  padding:3rem clamp(1.5rem,5vw,3rem);
+  padding:2.25rem 0;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:1.5rem;
 }
-.footer-brand{display:flex;flex-direction:column;gap:0.4rem}
+.footer-brand{display:flex;flex-direction:column;gap:0.3rem}
 .footer-logo{
   font-family:var(--display);
-  font-size:1.4rem;
+  font-size:1.2rem;
   color:var(--ink);
   text-decoration:none;
-  letter-spacing:-0.02em;
-  font-weight:400;
+  letter-spacing:-0.005em;
+  font-weight:500;
 }
 .footer-tag{
-  font-family:var(--mono);
-  font-size:0.7rem;
+  font-size:0.75rem;
   color:var(--ink-mute);
-  letter-spacing:0.05em;
+  letter-spacing:0;
 }
 .footer-links{
   display:flex;
-  gap:1.75rem;
+  gap:1.5rem;
   list-style:none;
   flex-wrap:wrap;
 }
@@ -1221,18 +1042,28 @@ footer{
   transition:color 0.2s;
 }
 .footer-links a:hover{color:var(--moss-bright)}
+.footer-meta{
+  border-top:1px solid var(--line);
+  padding:1rem 0;
+  font-size:0.75rem;
+  color:var(--ink-mute);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+}
 
-/* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s ease,transform 0.8s ease}
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.7s ease, transform 0.7s ease}
 .reveal.visible{opacity:1;transform:none}
 
-/* ─── MOBILE DRAWER ─── */
+/* mobile drawer */
 .nav-drawer{
   position:fixed;
   inset:0;
   background:var(--bg);
   z-index:200;
-  padding:1.5rem;
+  padding:1.25rem clamp(1.25rem,4vw,2.5rem);
   display:flex;
   flex-direction:column;
   gap:0.5rem;
@@ -1244,58 +1075,59 @@ footer{
   align-self:flex-end;
   background:none;
   border:1px solid var(--line-strong);
-  border-radius:50%;
-  width:40px;height:40px;
+  border-radius:var(--radius-sm);
+  width:36px;height:36px;
   cursor:pointer;
-  font-size:1.3rem;
+  font-size:1.2rem;
   color:var(--ink);
-  margin-bottom:2rem;
+  margin-bottom:1.5rem;
   line-height:1;
 }
 .drawer-links{
   display:flex;
   flex-direction:column;
-  gap:0;
   list-style:none;
 }
 .drawer-links li a{
   display:block;
   font-family:var(--display);
-  font-size:1.6rem;
+  font-size:1.7rem;
   color:var(--ink);
   text-decoration:none;
-  padding:1rem 0;
+  padding:0.7rem 0;
   border-bottom:1px solid var(--line);
-  font-weight:400;
+  font-weight:500;
   letter-spacing:-0.01em;
 }
-.drawer-links li a em{color:var(--moss-bright);font-style:italic;font-weight:300}
+.drawer-links li a em{color:var(--moss-bright);font-style:italic;font-weight:400}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:1024px){
   .apps-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-bottom{grid-template-columns:1fr}
-  .hero-side-info{display:none}
-  .about-grid{grid-template-columns:1fr;gap:3rem}
   .testimonials-grid{grid-template-columns:1fr}
+}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+  .hero-side{padding-top:0;border-top:1px solid var(--line);padding-top:1.75rem}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .booking-inner{grid-template-columns:1fr;gap:2.5rem}
+  .section-head{grid-template-columns:1fr;gap:1.25rem}
+  .section-title{max-width:none}
+  .track-intro{grid-template-columns:1fr;gap:2rem}
 }
 @media(max-width:768px){
   .nav-links{display:none}
   .nav-hamburger{display:flex}
-  .section-head{grid-template-columns:1fr;gap:1.5rem}
   .apps-grid{grid-template-columns:1fr}
-  .track-intro{grid-template-columns:1fr;gap:2.5rem}
-  .booking-inner{grid-template-columns:1fr;gap:3rem}
-  .footer-inner{flex-direction:column;align-items:flex-start}
-  .scroll-hint{display:none}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:1.5rem}
+  .footer-meta{flex-direction:column;align-items:flex-start;gap:0.4rem}
 }
 @media(max-width:520px){
-  .hero-actions{flex-direction:column;width:100%}
+  .hero-actions{flex-direction:column;width:100%;align-items:stretch}
   .btn{justify-content:center;width:100%}
-  .hero-meta-bar{gap:1rem;padding:1rem 0}
-  .hero-meta-item strong{font-size:1.1rem}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:1.25rem}
   .policy-row{grid-template-columns:1fr;gap:0.3rem}
-  .policy-label{margin-bottom:0.2rem}
+  .policy-label{margin-bottom:0.1rem}
 }
 </style>
 </head>
@@ -1303,7 +1135,7 @@ footer{
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#">Taqi</a>
+  <a class="nav-logo" href="#">Taqi <span class="ampersand">Tahmid</span> Tanzil</a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#services">Services</a></li>
@@ -1331,39 +1163,38 @@ footer{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">
+  <div class="container hero-inner">
+    <div class="hero-meta">
       <span class="dot"></span>
-      <span class="label">Available · May 2026</span>
-      <span class="sep"></span>
-      <span class="label" style="opacity:0.9">Booking 48hr</span>
+      <span>Accepting new engagements · May 2026</span>
+      <span class="sep">·</span>
+      <span>Booking 48hr</span>
     </div>
-    <h1 class="hero-title">
-      Architecture<br>
-      decisions that<br>
-      <span class="italic">actually ship.</span>
-    </h1>
-    <div class="hero-meta-bar">
-      <div class="hero-meta-item"><strong>8+</strong>years shipping</div>
-      <div class="hero-meta-item"><strong>6</strong>live products</div>
-      <div class="hero-meta-item"><strong>40k+</strong>concurrent users</div>
-      <div class="hero-meta-item"><strong>5★</strong>peer reviews</div>
-    </div>
-    <div class="hero-bottom">
+    <div class="hero-grid">
       <div>
+        <h1 class="hero-title">
+          A senior engineer<br>
+          for the <span class="italic">difficult</span><br>
+          decisions.
+        </h1>
         <p class="hero-sub">
-          Senior mobile engineering help when you need it most — architecture reviews, mock interviews, and launch support for developers shipping real apps and chasing global roles.
+          Independent mobile engineering consulting for founders and teams shipping production apps. Architecture reviews, interview preparation, and App Store launch support — drawn from eight years of work across travel, fintech, civic, and social products.
         </p>
-        <div class="hero-actions" style="margin-top:2rem">
+        <div class="hero-actions">
           <a href="https://calendly.com/t-tanzil92/consultation" class="btn btn-primary" target="_blank" rel="noopener">
             Book a session <span class="arrow">→</span>
           </a>
           <a href="#work" class="btn btn-ghost">See the work</a>
         </div>
       </div>
-      <div class="hero-side-info">
-        <div>
+      <div class="hero-side">
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>8+</strong><span>Years shipping</span></div>
+          <div class="hero-stat"><strong>6</strong><span>Live products</span></div>
+          <div class="hero-stat"><strong>40k+</strong><span>Concurrent users</span></div>
+          <div class="hero-stat"><strong>5★</strong><span>Peer reviews</span></div>
+        </div>
+        <div style="margin-bottom:1.5rem">
           <div class="label">Primary stack</div>
           <div class="stack-list">
             <span class="stack-pill">Kotlin</span>
@@ -1373,7 +1204,7 @@ footer{
           </div>
         </div>
         <div>
-          <div class="label">Comfortable with</div>
+          <div class="label">Adjacent</div>
           <div class="stack-list">
             <span class="stack-pill">Backend</span>
             <span class="stack-pill">DevOps</span>
@@ -1384,7 +1215,6 @@ footer{
       </div>
     </div>
   </div>
-  <div class="scroll-hint">Scroll</div>
 </section>
 
 <!-- MARQUEE -->
@@ -1392,13 +1222,13 @@ footer{
   <div class="marquee-track">
     <span class="marquee-item">Travel eSIM</span><span class="marquee-dot"></span>
     <span class="marquee-item">Fintech &amp; Payroll</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Government / Civic</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Government &amp; Civic</span><span class="marquee-dot"></span>
     <span class="marquee-item">Real Estate</span><span class="marquee-dot"></span>
     <span class="marquee-item">Cross-Cultural Social</span><span class="marquee-dot"></span>
     <span class="marquee-item">Consumer Commerce</span><span class="marquee-dot"></span>
     <span class="marquee-item">Travel eSIM</span><span class="marquee-dot"></span>
     <span class="marquee-item">Fintech &amp; Payroll</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Government / Civic</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Government &amp; Civic</span><span class="marquee-dot"></span>
     <span class="marquee-item">Real Estate</span><span class="marquee-dot"></span>
     <span class="marquee-item">Cross-Cultural Social</span><span class="marquee-dot"></span>
     <span class="marquee-item">Consumer Commerce</span><span class="marquee-dot"></span>
@@ -1407,25 +1237,21 @@ footer{
 
 <!-- ABOUT -->
 <section class="about-wrap">
-  <div class="section reveal">
+  <div class="container section reveal">
     <div class="section-head">
       <div>
-        <p class="section-eyebrow">About</p>
-        <h2 class="section-title">Not a tutorial.<br>A <em>senior engineer</em> on your problem.</h2>
+        <p class="section-eyebrow">About the practice</p>
+        <h2 class="section-title">A small, deliberate consultancy — <em>one engineer,</em> deep involvement.</h2>
       </div>
     </div>
     <div class="about-grid">
       <div>
         <div class="about-text">
           <p>
-            I've spent 8+ years building mobile products in startups — the kind where you're the developer,
-            the architect, the code reviewer, and the person explaining tradeoffs to non-technical founders
-            <strong>all in the same week.</strong>
+            I've spent eight years building mobile products inside startups — the kind where you're the developer, the architect, the code reviewer, and the person explaining tradeoffs to non-technical founders <strong>all in the same week.</strong>
           </p>
           <p>
-            I've shipped apps to App Store and Play Store across travel, fintech, government, and social — led teams,
-            mentored juniors into confident mid-level engineers, and sat on both sides of the interview table for
-            senior global roles.
+            Apps I've shipped span travel eSIM, fintech payroll, government civic, real estate, and cross-cultural social. I've led teams, mentored juniors into capable mid-level engineers, and sat on both sides of the interview table for senior global roles.
           </p>
         </div>
         <div class="pullquote">
@@ -1433,15 +1259,15 @@ footer{
         </div>
         <div class="about-text">
           <p>
-            <strong>Practical over theoretical.</strong> Scalable over clever. Business-aware over buzzword-heavy.
+            The work is practical, not theoretical. Scalable, not clever. Business-aware, not buzzword-driven. Every engagement begins with a real problem and ends with a decision you can act on.
           </p>
         </div>
       </div>
       <div>
         <div class="about-card">
-          <div class="about-card-label">Latest Review · LinkedIn</div>
+          <div class="about-card-label">Recent recommendation</div>
           <div class="about-card-quote">
-            "Always up for a challenge and proactive in researching the best ways to implement solutions. Strong understanding of building scalable, high-performance applications."
+            Always up for a challenge and proactive in researching the best ways to implement solutions. A strong understanding of building scalable, high-performance applications.
           </div>
           <div class="about-card-attr">
             <span class="name">Valeria Francis</span>
@@ -1450,7 +1276,7 @@ footer{
         </div>
         <div class="about-links">
           <a class="about-link" href="https://taqi92.github.io/" target="_blank" rel="noopener">
-            <span>Portfolio · taqi92.github.io</span>
+            <span>Portfolio</span>
             <span class="arrow">↗</span>
           </a>
           <a class="about-link" href="https://github.com/taqi92" target="_blank" rel="noopener">
@@ -1458,11 +1284,11 @@ footer{
             <span class="arrow">↗</span>
           </a>
           <a class="about-link" href="https://www.smartjsonviewer.com/" target="_blank" rel="noopener">
-            <span>Free tool · smartjsonviewer.com</span>
+            <span>smartjsonviewer.com</span>
             <span class="arrow">↗</span>
           </a>
           <a class="about-link" href="https://www.linkedin.com/in/t-t-tanzil/" target="_blank" rel="noopener">
-            <span>LinkedIn · t-t-tanzil</span>
+            <span>LinkedIn</span>
             <span class="arrow">↗</span>
           </a>
         </div>
@@ -1473,14 +1299,14 @@ footer{
 
 <!-- WORK -->
 <section class="work-wrap">
-  <div class="section reveal section-light" id="work">
+  <div class="container section reveal" id="work">
     <div class="section-head">
       <div>
-        <p class="section-eyebrow">Shipped Work</p>
-        <h2 class="section-title">Six live products.<br><em>Real users.</em> Real stores.</h2>
+        <p class="section-eyebrow">Selected work</p>
+        <h2 class="section-title">Six products. <em>Real users.</em> Real stores.</h2>
       </div>
       <p class="section-lead">
-        Production code serving users across six countries — travel eSIM, fintech, government civic, social, real estate, and consumer commerce.
+        Production code serving users across six markets — travel eSIM, fintech, civic, social, real estate, and consumer commerce.
       </p>
     </div>
 
@@ -1488,18 +1314,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/truely-travel-esim-data-plan/id6480101996" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/truely.png" alt="Truely app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/truely.png" alt="Truely app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">01 / 06</span>
         </div>
         <div class="app-body">
           <p class="app-type">Travel eSIM</p>
           <h3>Truely</h3>
-          <p>Global eSIM platform. Real-time data plan provisioning, international payments, cross-border connectivity at scale.</p>
+          <p>Global eSIM platform. Real-time data plan provisioning, international payments, and cross-border connectivity at scale.</p>
           <div class="app-tags">
             <span class="tag">Network</span><span class="tag">Payments</span><span class="tag">Multi-region</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1507,18 +1333,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/nypd-columbia-association/id1588621313" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/nypd.png" alt="NYPD Columbia Association app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/nypd.png" alt="NYPD Columbia app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">02 / 06</span>
         </div>
         <div class="app-body">
-          <p class="app-type">Government · Civic</p>
+          <p class="app-type">Civic</p>
           <h3>NYPD Columbia</h3>
-          <p>US police association app. Strict App Store review standards, high-trust user base, secure authentication.</p>
+          <p>US police association app. Strict App Store review standards, high-trust user base, and secure authentication.</p>
           <div class="app-tags">
             <span class="tag">Secure Auth</span><span class="tag">Compliance</span><span class="tag">Delivery</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1526,18 +1352,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/tomo-%E5%8F%8B/id6737231798" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/tomo.png" alt="Tomo app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/tomo.png" alt="Tomo app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">03 / 06</span>
         </div>
         <div class="app-body">
-          <p class="app-type">Cross-Cultural Social</p>
+          <p class="app-type">Social</p>
           <h3>Tomo 友</h3>
-          <p>Real-time interactions, multi-language UX, Japanese market launch. Cross-cultural community at scale.</p>
+          <p>Real-time interactions, multi-language UX, and a Japanese market launch. Cross-cultural community at scale.</p>
           <div class="app-tags">
             <span class="tag">Real-time</span><span class="tag">i18n</span><span class="tag">Social</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1545,18 +1371,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/reprecinct/id6444239603" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/reprecinct.png" alt="rePrecinct app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/reprecinct.png" alt="rePrecinct app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">04 / 06</span>
         </div>
         <div class="app-body">
-          <p class="app-type">Real Estate</p>
+          <p class="app-type">Real estate</p>
           <h3>rePrecinct</h3>
-          <p>Buyers, sellers, properties. Heavy data, maps integration, listing UX optimized for performance under load.</p>
+          <p>Buyers, sellers, and properties. Heavy data, maps integration, listing UX optimized for performance under load.</p>
           <div class="app-tags">
-            <span class="tag">Maps</span><span class="tag">Search</span><span class="tag">Perf</span>
+            <span class="tag">Maps</span><span class="tag">Search</span><span class="tag">Performance</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1564,18 +1390,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/payway-salary/id6642660765" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/payway.png" alt="Payway Salary app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/payway.png" alt="Payway Salary app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">05 / 06</span>
         </div>
         <div class="app-body">
-          <p class="app-type">Fintech · Payroll</p>
+          <p class="app-type">Fintech</p>
           <h3>Payway Salary</h3>
-          <p>Payroll and salary management. Fintech-grade security, encrypted storage, role-based access control.</p>
+          <p>Payroll and salary management. Fintech-grade security, encrypted storage, and role-based access control.</p>
           <div class="app-tags">
             <span class="tag">Encryption</span><span class="tag">RBAC</span><span class="tag">Fintech</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1583,18 +1409,18 @@ footer{
 
       <a class="app-card" href="https://apps.apple.com/us/app/poshora-app/id6642673369" target="_blank" rel="noopener">
         <div class="app-card-header">
-          <div class="app-icon"><img src="assets/poshora.png" alt="Poshora app icon" loading="lazy" width="128" height="128"></div>
+          <div class="app-icon"><img src="assets/poshora.png" alt="Poshora app icon" loading="lazy" width="112" height="112"></div>
           <span class="app-num">06 / 06</span>
         </div>
         <div class="app-body">
-          <p class="app-type">Consumer Commerce</p>
+          <p class="app-type">Commerce</p>
           <h3>Poshora</h3>
-          <p>Daily-use scale commerce app. Smooth checkout experience, high performance under sustained load.</p>
+          <p>Daily-use commerce app. Smooth checkout experience and high performance under sustained load.</p>
           <div class="app-tags">
-            <span class="tag">Commerce</span><span class="tag">Checkout</span><span class="tag">Perf</span>
+            <span class="tag">Commerce</span><span class="tag">Checkout</span><span class="tag">Performance</span>
           </div>
           <div class="app-footer">
-            <span class="app-link">App Store <span>→</span></span>
+            <span class="app-link">View on App Store →</span>
             <span class="app-store-badge">iOS</span>
           </div>
         </div>
@@ -1606,35 +1432,35 @@ footer{
 
 <!-- SERVICES -->
 <section class="services-wrap">
-  <div class="section reveal" id="services">
+  <div class="container section reveal" id="services">
     <div class="section-head">
       <div>
-        <p class="section-eyebrow">Services</p>
-        <h2 class="section-title">Find your <em>track.</em></h2>
+        <p class="section-eyebrow">Engagements</p>
+        <h2 class="section-title">Three focused <em>tracks.</em></h2>
       </div>
       <p class="section-lead">
-        Three focused tracks. Pick the one that fits — or book a 30-min consultation and we figure it out together.
+        Pick the track that fits — or start with a thirty-minute consultation and we figure out the right next step together.
       </p>
     </div>
 
     <div class="tracks-nav">
-      <button class="track-tab active" onclick="switchTrack('builders',this)">Builders</button>
-      <button class="track-tab" onclick="switchTrack('growers',this)">Growers</button>
-      <button class="track-tab" onclick="switchTrack('explorers',this)">AI Explorers</button>
+      <button class="track-tab active" onclick="switchTrack('builders',this)"><span class="num">01</span>Builders</button>
+      <button class="track-tab" onclick="switchTrack('growers',this)"><span class="num">02</span>Growers</button>
+      <button class="track-tab" onclick="switchTrack('explorers',this)"><span class="num">03</span>AI Explorers</button>
     </div>
 
     <!-- BUILDERS -->
     <div class="track-panel active" id="panel-builders">
       <div class="track-intro">
         <div>
-          <h3>Mobile consulting<br>& <em>dev services</em></h3>
-          <p>You bring the problem. I help you solve it. Architecture, performance, App Store launches, interview prep. Come with a repo or a clear problem statement — these are working sessions, not exploratory chats.</p>
-          <span class="track-pill">For builders shipping real products</span>
+          <h3>Mobile consulting &amp; <em>dev services.</em></h3>
+          <p>You bring the problem. I help you solve it — architecture, performance, App Store launches, interview prep. Come with a repo or a clear problem statement. These are working sessions, not exploratory chats.</p>
+          <span class="track-context">For builders shipping real products</span>
         </div>
         <div class="track-topics">
           <div class="topic-row"><span class="topic-num">01</span><span>Technical architecture and scaling decisions</span></div>
           <div class="topic-row"><span class="topic-num">02</span><span>Kotlin · Jetpack Compose · Flutter codebases</span></div>
-          <div class="topic-row"><span class="topic-num">03</span><span>US/EU remote mock interviews with real feedback</span></div>
+          <div class="topic-row"><span class="topic-num">03</span><span>US/EU remote mock interviews with senior-level feedback</span></div>
           <div class="topic-row"><span class="topic-num">04</span><span>App Store and Play Console launch support</span></div>
           <div class="topic-row"><span class="topic-num">05</span><span>Codebase health checks and tech debt audits</span></div>
         </div>
@@ -1643,7 +1469,7 @@ footer{
         <div class="service-card">
           <div class="service-note">Most popular</div>
           <h4>Tech Consultation</h4>
-          <p>Architecture, scaling, performance, tricky bugs. Come with a repo or a clear problem. Direct execution — not a tutorial.</p>
+          <p>Architecture, scaling, performance, tricky bugs. Come with a repo or a clear problem. Direct execution.</p>
           <div class="service-footer">
             <span class="service-duration">30 min</span>
             <span class="service-price"><span class="currency">$</span>99</span>
@@ -1652,15 +1478,15 @@ footer{
         <div class="service-card featured">
           <div class="service-note">Recommended</div>
           <h4>Mock Interview</h4>
-          <p>Live coding, system design, communication evaluation. Ends with a detailed improvement roadmap and senior-level feedback.</p>
+          <p>Live coding, system design, communication evaluation. Ends with a detailed improvement roadmap.</p>
           <div class="service-footer">
             <span class="service-duration">60 min</span>
             <span class="service-price"><span class="currency">$</span>149</span>
           </div>
         </div>
         <div class="service-card">
-          <div class="service-note">For teams & MVPs</div>
-          <h4>Code & Architecture Review</h4>
+          <div class="service-note">For teams &amp; MVPs</div>
+          <h4>Code &amp; Architecture Review</h4>
           <p>Honest health check of your codebase. Scalability, state management, tech debt — what to fix first and why.</p>
           <div class="service-footer">
             <span class="service-duration">Per project</span>
@@ -1686,9 +1512,9 @@ footer{
     <div class="track-panel" id="panel-growers">
       <div class="track-intro">
         <div>
-          <h3>Engineering foundations<br>for <em>juniors</em></h3>
+          <h3>Engineering foundations for <em>juniors.</em></h3>
           <p>Most developers get stuck not because they lack effort, but because they don't know what to focus on. Writing code that works isn't the same as writing code a team can maintain. This closes that gap.</p>
-          <span class="track-pill">For students and junior devs</span>
+          <span class="track-context">For students and junior developers</span>
         </div>
         <div class="track-topics">
           <div class="topic-row"><span class="topic-num">01</span><span>Git, PRs, commit culture — how real teams work</span></div>
@@ -1720,9 +1546,9 @@ footer{
         <div class="service-card">
           <div class="service-note">Full programme</div>
           <h4>Interview Prep Pack</h4>
-          <p>4 mock interviews + resume review + improvement roadmap. Async support between sessions included.</p>
+          <p>Four mock interviews, resume review, improvement roadmap. Async support between sessions included.</p>
           <div class="service-footer">
-            <span class="service-duration">Async + Calls</span>
+            <span class="service-duration">Async + calls</span>
             <span class="service-price"><span class="currency">$</span>299</span>
           </div>
         </div>
@@ -1736,15 +1562,15 @@ footer{
     <div class="track-panel" id="panel-explorers">
       <div class="track-intro">
         <div>
-          <h3>AI literacy<br>for <em>non-tech people</em></h3>
-          <p>No code. No jargon. Practical skills you can use the same day. Every session is 1-on-1 screen share built around your actual workflows — not a generic AI demo.</p>
-          <span class="track-pill">For non-technical professionals</span>
+          <h3>AI literacy for <em>non-technical professionals.</em></h3>
+          <p>No code. No jargon. Practical skills you can use the same day. Every session is one-on-one screen share, built around your actual workflows — not a generic AI demo.</p>
+          <span class="track-context">For non-technical professionals and teams</span>
         </div>
         <div class="track-topics">
-          <div class="topic-row"><span class="topic-num">01</span><span>What ChatGPT, Claude, Gemini actually do — and where they fail</span></div>
+          <div class="topic-row"><span class="topic-num">01</span><span>What ChatGPT, Claude, and Gemini actually do — and where they fail</span></div>
           <div class="topic-row"><span class="topic-num">02</span><span>Choosing the right AI tool for your specific workflow</span></div>
-          <div class="topic-row"><span class="topic-num">03</span><span>Prompt engineering: better questions → better answers</span></div>
-          <div class="topic-row"><span class="topic-num">04</span><span>Automating emails, reports, summaries</span></div>
+          <div class="topic-row"><span class="topic-num">03</span><span>Prompt engineering: better questions, better answers</span></div>
+          <div class="topic-row"><span class="topic-num">04</span><span>Automating emails, reports, and summaries</span></div>
           <div class="topic-row"><span class="topic-num">05</span><span>Responsible use — when AI hallucinates and how to catch it</span></div>
         </div>
       </div>
@@ -1752,7 +1578,7 @@ footer{
         <div class="service-card">
           <div class="service-note">Best entry point</div>
           <h4>AI Literacy Session</h4>
-          <p>1-on-1 screen share. Your tasks, your workflow. Every session ends with something usable today.</p>
+          <p>One-on-one screen share. Your tasks, your workflow. Every session ends with something usable today.</p>
           <div class="service-footer">
             <span class="service-duration">60 min</span>
             <span class="service-price"><span class="currency">$</span>69</span>
@@ -1761,7 +1587,7 @@ footer{
         <div class="service-card featured">
           <div class="service-note">Most popular</div>
           <h4>AI Starter Pack</h4>
-          <p>3 sessions: AI Demystified → Prompt Engineering → Workflow Automation. Structured progression, real outcomes.</p>
+          <p>Three sessions: AI Demystified, Prompt Engineering, Workflow Automation. Structured progression.</p>
           <div class="service-footer">
             <span class="service-duration">3 × 60 min</span>
             <span class="service-price"><span class="currency">$</span>179</span>
@@ -1770,7 +1596,7 @@ footer{
         <div class="service-card">
           <div class="service-note">For teams</div>
           <h4>Team AI Workshop</h4>
-          <p>Group session for 5–10 people. Hands-on with your real workflows. Custom agenda per team.</p>
+          <p>Group session for five to ten people. Hands-on with your real workflows. Custom agenda per team.</p>
           <div class="service-footer">
             <span class="service-duration">Custom</span>
             <span class="service-price"><span class="currency">$</span>449</span>
@@ -1786,33 +1612,31 @@ footer{
 
 <!-- TESTIMONIALS -->
 <section class="testimonials-wrap">
-  <div class="section reveal section-light" id="testimonials">
+  <div class="container section reveal" id="testimonials">
     <div class="section-head">
       <div>
-        <p class="section-eyebrow">Reviews</p>
-        <h2 class="section-title">From people<br>who've <em>worked with me.</em></h2>
+        <p class="section-eyebrow">Recommendations</p>
+        <h2 class="section-title">From people who've <em>worked with me.</em></h2>
       </div>
       <p class="section-lead">
-        Colleagues, founders, and developers — direct quotes, unedited. See all recommendations on LinkedIn.
+        Colleagues, founders, and developers — direct quotes, unedited. Full list available on LinkedIn.
       </p>
     </div>
 
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <div class="quote-mark">"</div>
-        <blockquote>He's in charge of the mobile side while I handle the backend. Reliable and skilled — great at communication and problem-solving.</blockquote>
+        <blockquote>"He's in charge of the mobile side while I handle the backend. Reliable and skilled — great at communication and problem-solving."</blockquote>
         <div class="testimonial-attr">
           <div class="testimonial-avatar avatar-1">YU</div>
           <div class="attr-info">
             <span class="attr-name">Yana Ulyanova</span>
-            <span class="attr-role">Software Developer · worked together on a mobile project</span>
+            <span class="attr-role">Software Developer · mobile app collaboration</span>
           </div>
         </div>
       </div>
 
       <div class="testimonial-card">
-        <div class="quote-mark">"</div>
-        <blockquote>Exceptional skills in mobile development. A strong command of Flutter and native Android — creating high-quality, user-friendly mobile apps.</blockquote>
+        <blockquote>"Exceptional skills in mobile development. A strong command of Flutter and native Android — creating high-quality, user-friendly mobile apps."</blockquote>
         <div class="testimonial-attr">
           <div class="testimonial-avatar avatar-2">RR</div>
           <div class="attr-info">
@@ -1823,8 +1647,7 @@ footer{
       </div>
 
       <div class="testimonial-card">
-        <div class="quote-mark">"</div>
-        <blockquote>Always up for a challenge. Strong understanding of scalable, high-performance apps — and keeps the final product true to the intended UX.</blockquote>
+        <blockquote>"Always up for a challenge. Strong understanding of scalable, high-performance apps — and keeps the final product true to the intended UX."</blockquote>
         <div class="testimonial-attr">
           <div class="testimonial-avatar avatar-3">VF</div>
           <div class="attr-info">
@@ -1835,8 +1658,7 @@ footer{
       </div>
 
       <div class="testimonial-card">
-        <div class="quote-mark">"</div>
-        <blockquote>Super efficient while solving major programming challenges. Not only coding — he also weighed in on important business decisions.</blockquote>
+        <blockquote>"Super efficient while solving major programming challenges. Not only coding — he also weighed in on important business decisions."</blockquote>
         <div class="testimonial-attr">
           <div class="testimonial-avatar avatar-4">TT</div>
           <div class="attr-info">
@@ -1847,40 +1669,46 @@ footer{
       </div>
     </div>
 
-    <p style="margin-top:2.5rem;font-size:0.88rem;color:#7a7570">
-      All recommendations on
-      <a href="https://www.linkedin.com/in/t-t-tanzil/details/recommendations/" style="color:var(--moss-deep);text-decoration:none;font-weight:500;border-bottom:1px solid var(--moss-deep);padding-bottom:1px" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <p style="margin-top:2rem;font-size:0.88rem;color:var(--paper-muted)">
+      Full list of recommendations on
+      <a href="https://www.linkedin.com/in/t-t-tanzil/details/recommendations/" style="color:var(--moss-deep);text-decoration:none;font-weight:500;border-bottom:1px solid var(--moss-deep);padding-bottom:1px" target="_blank" rel="noopener">LinkedIn →</a>
     </p>
   </div>
 </section>
 
 <!-- BOOKING -->
 <section class="booking-wrap">
-  <div class="booking-inner reveal">
-    <div>
-      <p class="section-eyebrow">Booking</p>
-      <h2>Ready to <em>move fast?</em></h2>
-      <p>Most sessions available within 48 hours. Pick a time on Calendly — payment confirms your slot. Show up ready with your problem, repo, or goal.</p>
-      <a href="https://calendly.com/t-tanzil92/consultation" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem">
-        Book a session <span class="arrow">→</span>
-      </a>
-    </div>
-    <div class="booking-policies">
-      <div class="policy-row">
-        <span class="policy-label">Payment</span>
-        <span>Required at booking — confirms your slot instantly.</span>
+  <div class="container section reveal">
+    <div class="booking-inner">
+      <div>
+        <p class="section-eyebrow">Booking</p>
+        <h2>Ready to <em>move forward?</em></h2>
+        <p>Most sessions are available within forty-eight hours. Pick a time on Calendly and you'll receive a confirmation with next steps. Come prepared with your problem, your repo, or your goal.</p>
+        <a href="https://calendly.com/t-tanzil92/consultation" class="btn btn-primary" target="_blank" rel="noopener">
+          Book a session <span class="arrow">→</span>
+        </a>
       </div>
-      <div class="policy-row">
-        <span class="policy-label">Rescheduling</span>
-        <span>Free up to 12 hours before the session.</span>
-      </div>
-      <div class="policy-row">
-        <span class="policy-label">Cancellation</span>
-        <span>Under 12 hours or no-show — non-refundable.</span>
-      </div>
-      <div class="policy-row">
-        <span class="policy-label">Questions?</span>
-        <span><a href="https://www.linkedin.com/in/t-t-tanzil/" style="color:var(--moss-bright);text-decoration:none;border-bottom:1px solid var(--moss-bright)" target="_blank" rel="noopener">Message on LinkedIn →</a></span>
+      <div class="booking-policies">
+        <div class="policy-row">
+          <span class="policy-label">Payment</span>
+          <span>Payment instructions are sent by email after booking. Slot confirmed once payment is received.</span>
+        </div>
+        <div class="policy-row">
+          <span class="policy-label">Confirmation</span>
+          <span>Twelve hours from booking to complete payment, or the slot is released.</span>
+        </div>
+        <div class="policy-row">
+          <span class="policy-label">Rescheduling</span>
+          <span>Free up to twelve hours before the session.</span>
+        </div>
+        <div class="policy-row">
+          <span class="policy-label">Cancellation</span>
+          <span>Under twelve hours, or no-show — non-refundable.</span>
+        </div>
+        <div class="policy-row">
+          <span class="policy-label">Questions?</span>
+          <span><a href="https://www.linkedin.com/in/t-t-tanzil/" style="color:var(--moss-bright);text-decoration:none;border-bottom:1px solid var(--moss-bright)" target="_blank" rel="noopener">Message on LinkedIn →</a></span>
+        </div>
       </div>
     </div>
   </div>
@@ -1888,46 +1716,46 @@ footer{
 
 <!-- FAQ -->
 <section class="faq-wrap">
-  <div class="section reveal" id="faq">
+  <div class="container section reveal" id="faq">
     <div class="section-head">
       <div>
-        <p class="section-eyebrow">FAQ</p>
+        <p class="section-eyebrow">Frequently asked</p>
         <h2 class="section-title">Common <em>questions.</em></h2>
       </div>
     </div>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          How fast can I book?
-          <div class="faq-icon">+</div>
+          How fast can I book a session?
+          <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Most sessions are available within 48 hours. Check Calendly for live availability.</div>
+        <div class="faq-a">Most sessions are available within forty-eight hours. Check Calendly for live availability.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           What if my problem doesn't fit a category?
-          <div class="faq-icon">+</div>
+          <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Book a 30-min Tech Consultation. We'll figure out the right next step together — it's the lowest-risk starting point.</div>
+        <div class="faq-a">Book a thirty-minute Tech Consultation. We'll figure out the right next step together — it's the lowest-risk starting point.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           Do you work with companies and teams?
-          <div class="faq-icon">+</div>
+          <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">Yes — Code Reviews, Full Launch Support, and Team AI Workshops are all designed for teams and startups. Message me on LinkedIn first if you have a larger scope in mind.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           What tech stack do you work with?
-          <div class="faq-icon">+</div>
+          <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">Primarily Kotlin, Jetpack Compose, Flutter, and Dart. Also comfortable across backend decisions, DevOps (CI/CD, cloud), and broader product architecture.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           I'm not a developer — is AI Explorers right for me?
-          <div class="faq-icon">+</div>
+          <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">Yes — it's built for exactly that. No code, no jargon. Just practical AI skills built around your real workflow. We use screen share and work through your actual tasks together.</div>
       </div>
@@ -1937,18 +1765,24 @@ footer{
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a class="footer-logo" href="#">Taqi</a>
-      <span class="footer-tag">Senior mobile engineer · Available May 2026</span>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="footer-logo" href="#">Taqi <span class="ampersand" style="color:var(--moss-bright);font-style:italic;font-weight:400">Tahmid</span> Tanzil</a>
+        <span class="footer-tag">Mobile engineering consulting · Accepting engagements</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/taqi92" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://taqi92.github.io/" target="_blank" rel="noopener">Portfolio</a></li>
+        <li><a href="https://www.linkedin.com/in/t-t-tanzil/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://www.smartjsonviewer.com/" target="_blank" rel="noopener">JSON Viewer</a></li>
+        <li><a href="https://calendly.com/t-tanzil92/consultation" target="_blank" rel="noopener">Book a session</a></li>
+      </ul>
     </div>
-    <ul class="footer-links">
-      <li><a href="https://github.com/taqi92" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://taqi92.github.io/" target="_blank" rel="noopener">Portfolio</a></li>
-      <li><a href="https://www.linkedin.com/in/t-t-tanzil/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://www.smartjsonviewer.com/" target="_blank" rel="noopener">JSON Viewer</a></li>
-      <li><a href="https://calendly.com/t-tanzil92/consultation" target="_blank" rel="noopener">Book a session ↗</a></li>
-    </ul>
+    <div class="footer-meta">
+      <span>© 2026 Taqi Tahmid Tanzil. Independent consulting practice.</span>
+      <span>Built thoughtfully · No tracking</span>
+    </div>
   </div>
 </footer>
 
